@@ -66,6 +66,73 @@
         </div>
         <canvas id="chart" width="600" height="150"></canvas>
         <section class="container-fluid"></section>
+        <script>
+            const ctx = document.getElementById("chart").getContext("2d");
+            const url = "https://min-api.cryptocompare.com/data/";
+            const sym = "ETH";
+            function dateTime(d) {
+              let dt = eval(d * 1000);
+              let myDate = new Date(dt);
+              return myDate.toLocaleString();
+            }
+
+            $.getJSON(
+            url + "histoday?fsym=" + sym + "&tsym=USD&limit=60&aggregate=3&e=Bitfinex",
+            function (data) {
+              let label = [];
+              let price = [];
+              let d = data["Data"].slice(19, data["Data"].length + 1);
+              for (i in d) {
+                price.push(d[i]["close"]);
+                label.push(dateTime(d[i]["time"]));
+              }
+
+              $.getJSON(url + "price?fsym=" + sym + "&tsyms=USD", function (latest) {
+                price.push(latest["USD"]);
+                label.push(dateTime($.now()));
+                $("#price").append(latest["USD"]);
+              });
+
+              const chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                  labels: label,
+                  datasets: [
+                  {
+                    label: sym + "USD",
+                    pointRadius: 2,
+                    pointBorderWidth: 2,
+                    pointBackgroundColor: "#CCCCCC",
+                    backgroundColor: "#222222",
+                    borderColor: "#CCCCCC",
+                    data: price }] },
+                options: {
+                  elements: {
+                    point: {
+                      radius: 0,
+                      hitRadius: 5,
+                      hoverRadius: 5 } },
+                  legend: {
+                    display: false },
+                  scales: {
+                    xAxes: [
+                    {
+                      display: false }],
+                    yAxes: [
+                    {
+                      display: false,
+                      ticks: {
+                        beginAtZero: false } }] },
+
+                  layout: {
+                    padding: {
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0 } } } });
+            });
+            $("h1").prepend(sym + " $");
+        </script>
         <script src="https://iexperimen.github.io/cryptolive/eth/jQuery_main_eth_01.js"></script>
     </body>
 </html>
