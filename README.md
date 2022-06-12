@@ -7,6 +7,3 @@ https://iexperimen.github.io/cryptolive/eth/
 
 # BTC Chart Widget
 https://iexperimen.github.io/cryptolive/btc/
-
-# BNB Chart Widget
-https://iexperimen.github.io/cryptolive/bnb/
