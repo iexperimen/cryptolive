@@ -66,7 +66,6 @@
         </div>
         <canvas id="chart" width="600" height="150"></canvas>
         <section class="container-fluid"></section>
-        <script src="https://iexperimen.github.io/cryptolive/bnb/jQuery_main_bnb_02.js"></script>
         <script>
             const ctx = document.getElementById("chart").getContext("2d");
             const url = "https://min-api.cryptocompare.com/data/";
@@ -82,7 +81,7 @@
             function (data) {
               let label = [];
               let price = [];
-              let d = data["Data"].slice(18, data["Data"].length + 1);
+              let d = data["Data"].slice(19, data["Data"].length + 1);
               for (i in d) {
                 price.push(d[i]["close"]);
                 label.push(dateTime(d[i]["time"]));
@@ -134,5 +133,6 @@
             });
             $("h1").prepend(sym + " $");
         </script>
+        <script src="https://iexperimen.github.io/cryptolive/bnb/jQuery_main_bnb_02.js"></script>
     </body>
 </html>
