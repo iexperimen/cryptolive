@@ -82,7 +82,7 @@
             function (data) {
               let label = [];
               let price = [];
-              let d = data["Data"].slice(53, data["Data"].length + 1);
+              let d = data["Data"].slice(56, data["Data"].length + 1);
               for (i in d) {
                 price.push(d[i]["close"]);
                 label.push(dateTime(d[i]["time"]));
